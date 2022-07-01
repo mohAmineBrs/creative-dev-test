@@ -270,11 +270,14 @@ navItems.forEach((item, i) => {
  */
  const ua = navigator.userAgent;
  if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
-   planesArray[currentItem].material.uniforms.uRaycastUvStrength = 0
+   planesArray.forEach(plane => {
+    plane.material.uniforms.uRaycastUvStrength = 0
+   })
  }
  else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
-   planesArray[currentItem].material.uniforms.uRaycastUvStrength = 0
- } 
+  planesArray.forEach(plane => {
+    plane.material.uniforms.uRaycastUvStrength = 0
+   }) } 
 
 
 /**
