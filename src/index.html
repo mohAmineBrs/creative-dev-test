@@ -7,7 +7,9 @@
     <title>Creative Dev Test</title>
   </head>
   <body>
-    <canvas class="webgl"></canvas>
+    <div class="canvasWrapper">
+      <canvas class="webgl"></canvas>
+    </div>
     <div class="htmlContent">
       <!---------------------------------------- Loading ----------------------------------------------->
       <div class="loading">
@@ -21,35 +23,69 @@
       <nav class="nav">
         <ul class="nav__list">
           <li class="nav__item nav__item--active">
-            <span class="nav__item__num">1</span>
+            <a href="#" class="nav__item__num">1</a>
             <div class="nav__item__svg"></div>
           </li>
           <li class="nav__item">
-            <span class="nav__item__num">2</span>
+            <a href="#" class="nav__item__num">2</a>
             <div class="nav__item__svg"></div>
           </li>
           <li class="nav__item">
-            <span class="nav__item__num">3</span>
+            <a href="#" class="nav__item__num">3</a>
             <div class="nav__item__svg"></div>
           </li>
         </ul>
       </nav>
       <!--------------------------------------- Hero Text ---------------------------------------------->
       <div class="heroText">
-        <h2 class="heading">
-          <span class="heading__wrapper">
-            <span class="heading__line">Creative people </span>
-            <span class="heading__line">live longer.</span>
-          </span>
-        </h2>
-        <p class="paragraph">
-          <span class="paragraph__wrapper"
-            >Due to their openness, creative minds tend to live longer, and may
-            even get more creative with age. Creative people react to stress,
-            often seeing obstacles as something to be overcome rather than a
-            barrier which can’t be breached.
-          </span>
-        </p>
+        <div class="heroText__slide heroText__slide--main">
+          <h2 class="heading">
+            <span class="heading__wrapper">
+              <span class="heading__line">Creative people </span>
+              <span class="heading__line">live longer.</span>
+            </span>
+          </h2>
+          <p class="paragraph">
+            <span class="paragraph__wrapper"
+              >Due to their openness, creative minds tend to live longer, and may
+              even get more creative with age. Creative people react to stress,
+              often seeing obstacles as something to be overcome rather than a
+              barrier which can’t be breached.
+            </span>
+          </p>
+        </div>
+        <div class="heroText__slide">
+          <h2 class="heading">
+            <span class="heading__wrapper">
+              <span class="heading__line">Positivity makes </span>
+              <span class="heading__line">more creative.</span>
+            </span>
+          </h2>
+          <p class="paragraph">
+            <span class="paragraph__wrapper"
+              >While it’s often thought that a case of the blues will
+              get the creative juices flowing, it turns out happiness
+              and motivation actually bring out the highest levels
+              of creative activity.
+            </span>
+          </p>
+        </div>
+        <div class="heroText__slide">
+          <h2 class="heading">
+            <span class="heading__wrapper">
+              <span class="heading__line">Creativity is </span>
+              <span class="heading__line">additive.</span>
+            </span>
+          </h2>
+          <p class="paragraph">
+            <span class="paragraph__wrapper"
+              >Everyday creative activity is crucial for creative
+              behaviour. Similar to the notion that practice makes
+              perfect, exercising the creative muscles in your brain
+              is known to boost creative accomplishment.
+            </span>
+          </p>
+        </div>
       </div>
     </div>
     <!-- <script type="module" src="/three.js"></script> -->

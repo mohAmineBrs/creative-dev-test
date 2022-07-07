@@ -37,7 +37,7 @@ let currentItem = 0;
 let offset = new THREE.Vector2(0,0)
 let mouse = new THREE.Vector2(0,0)
 let sceneReady = false
-
+let wheelSpeed = 0
 
 
 /**
@@ -87,12 +87,12 @@ const loadingManager = new THREE.LoadingManager(
 
 const renderer = new THREE.WebGLRenderer( { 
   canvas: canvas,
-  antialias: true 
+  antialias: true,
+  alpha: true
 } );
 
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.setClearColor('#ffa0a0')
 renderer.setAnimationLoop( animation );
 
 /**
@@ -218,50 +218,109 @@ window.addEventListener("resize", () => {
 
 });
 
+/**
+ * Function That Handles Plane Animation
+ */
+const animatePlane = () => {
+
+    // Animate Planes on Each Nav Item Click
+    navItems.forEach((itm, i) => {
+      anime({
+        targets: planesArray[i].position,
+        y: -i * (textureHeight + textureMargin) + currentItem * (textureHeight + textureMargin) + texturePosY,
+        duration: 2000,  // 3000
+        easing: easing,
+      })
+      anime({
+        targets: planesArray[i].rotation,
+        y: `-=${Math.PI}`,
+        duration: 3000,
+        easing: easing,
+      })
+      anime({
+        targets: matArray[i].uniforms.uTwistAngle,
+        value: 8,
+        duration: 1500, 
+        easing: easing,
+        complete: () => {
+          anime({
+            targets: matArray[i].uniforms.uTwistAngle,
+            value: 1,
+            duration: 1500,
+            easing: easing,
+          })
+        }
+      })
+    })
+}
+
+/**
+ * Navigate Through Nav Items Click
+ */
+ navItems.forEach((item, i) => {
+  item.addEventListener('click', e => {
+      if (currentItem != i) {
+          currentItem = i
+          animatePlane()
+      }
+  })
+})
+
+/**
+ * Navigate Through Keybord 1/2/3 Keys
+ */
+ document.addEventListener('keydown', (e) => {
+  // 1/2/3 Keys
+  switch(e.which) {
+    case 97:
+        if (currentItem != 0 ){
+            currentItem = 0
+            animatePlane()
+        }
+        break;
+    case 98:
+        if (currentItem != 1 ){
+            currentItem = 1
+            animatePlane()
+        }
+        break;
+    case 99:
+        if (currentItem != 2 ){
+            currentItem = 2
+            animatePlane()
+        }
+        break;
+  } 
+
+  // Up & Down Keys
+  switch(e.which) {
+    case 38:   // Up
+        if (currentItem != 0) {
+            currentItem--
+            animatePlane()
+        } 
+        break;
+    case 40:   // Down
+        if (currentItem != 2) {
+            currentItem++
+            animatePlane()
+        }
+        break;
+}
+})
 
 
 /**
- * Animating Planes on Nav Item Click
+ * Navigate Through Mouse Wheel
  */
-navItems.forEach((item, i) => {
-    item.addEventListener('click', e => {
-      if(currentItem != i) {
-        currentItem = i
+ window.addEventListener("wheel", (e) => {
+  wheelSpeed += e.deltaY * 0.0025;
+  wheelSpeed = Math.min(Math.max(0, wheelSpeed), 2);
 
-        // Tweak Background Color
-        renderer.setClearColor(bgColor[i])
-
-        // Animate Planes on Each Nav Item Click
-        navItems.forEach((itm, i) => {
-          anime({
-            targets: planesArray[i].position,
-            y: -i * (textureHeight + textureMargin) + currentItem * (textureHeight + textureMargin) + texturePosY,
-            duration: 2000,  // 3000
-            easing: easing,
-          })
-          anime({
-            targets: planesArray[i].rotation,
-            y: `-=${Math.PI}`,
-            duration: 3000,
-            easing: easing,
-          })
-          anime({
-            targets: matArray[i].uniforms.uTwistAngle,
-            value: 8,
-            duration: 1500, 
-            easing: easing,
-            complete: () => {
-              anime({
-                targets: matArray[i].uniforms.uTwistAngle,
-                value: 1,
-                duration: 1500,
-                easing: easing,
-              })
-            }
-          })
-        })
-      }
-    })
+  if (currentItem != wheelSpeed) {
+      currentItem = Math.round(wheelSpeed)
+      animatePlane()
+  }
 })
 
 
