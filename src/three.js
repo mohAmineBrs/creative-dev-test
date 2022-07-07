@@ -109,10 +109,7 @@ const material = new THREE.ShaderMaterial({
   fragmentShader,
   side: THREE.DoubleSide,
   uniforms: {
-    uTexture1: { value: textureLoader.load(`/images/img1.jpg`)},
-    uTexture2: { value: textureLoader.load(`/images/img2.jpg`)},
-    uTexture3: { value: textureLoader.load(`/images/img3.jpg`)},
-    uCurrentItem: { value: 0 },
+    uTexture: { value: textureLoader.load(`/images/img1.jpg`)},
     uTime: { value: 0 },
     uWaveSpeed: { value: 2 },
     uTwistAngle: { value: 1 },
@@ -170,7 +167,8 @@ const creatingPlane = () => {
 
   navItems.forEach((itm, i) => {
     let mat = material.clone();
-    mat.uniforms.uCurrentItem.value = i
+    mat.uniforms.uTexture.value = textureLoader.load(`/images/img${i+1}.jpg`)
+
     matArray.push(mat);
 
     plane = new THREE.Mesh(geometry, mat);

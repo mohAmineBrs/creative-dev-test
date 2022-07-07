@@ -100,12 +100,14 @@ const headingTextReveal = () => {
 
 // Animating All Function
 const animateAll = () => {
+
     // Handling Nav Items (SVG And Numbers) Color Tweak And Animation
     navItems.forEach(itm => {
         itm.classList.remove('nav__item--active')
     })
     navItems[currentItem].classList.add('nav__item--active')
 
+    // Tweaking The 'textColor' And 'bgColor' Properties Value From CSS
     document.documentElement.style.setProperty('--textColor', textColor[currentItem])
     document.documentElement.style.setProperty('--bgColor', bgColor[currentItem])
 
@@ -113,6 +115,9 @@ const animateAll = () => {
     paragraphAnimation();
     headingTextHide();
     setTimeout(headingTextReveal, 500);
+
+    // Navigate to The Item URL 
+    window.location.href = `#${currentItem+1}`;
 }
 
 /**
@@ -191,3 +196,4 @@ window.addEventListener("wheel", (e) => {
         animateAll()
     }
 })
+
